@@ -18,7 +18,7 @@ public abstract class Character {
 
     private boolean isAlive;
 
-    private Polygon character;
+    private final Polygon character;
     private Point2D movement;
 
     public Character(Polygon polygon, int x, int y) {
@@ -36,7 +36,7 @@ public abstract class Character {
     }
 
     public boolean isIsAlive() {
-        return isAlive;
+        return !isAlive;
     }
 
     public void setIsAlive(boolean isAlive) {

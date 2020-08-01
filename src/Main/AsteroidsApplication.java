@@ -33,7 +33,7 @@ public class AsteroidsApplication extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         Pane pane = new Pane();
         pane.setBackground(new Background(new BackgroundFill(Color.web("#000033"), null, null)));
         pane.setPrefSize(600, 400);
@@ -78,15 +78,9 @@ public class AsteroidsApplication extends Application {
         HashMap<KeyCode, Boolean> input = new HashMap<>();
 
         scene.setOnKeyPressed(
-                (event) -> {
-                    input.put(event.getCode(), Boolean.TRUE);
-                }
-        );
+                (event) -> input.put(event.getCode(), Boolean.TRUE));
         scene.setOnKeyReleased(
-                (event) -> {
-                    input.put(event.getCode(), Boolean.FALSE);
-                }
-        );
+                (event) -> input.put(event.getCode(), Boolean.FALSE));
 
         new AnimationTimer() {
 
@@ -111,35 +105,29 @@ public class AsteroidsApplication extends Application {
                     projectile.setMovement(projectile.getMovement().normalize().multiply(3));
                     pane.getChildren().add(projectile.getCharacter());
                 }
-                projectiles.forEach(projectile -> {
-                    asteroids.forEach(asteroid -> {
-                        if (asteroid.collision(projectile)) {
-                            projectile.setIsAlive(false);
-                            asteroid.setIsAlive(false);
-                            text.setText("Points: " + points.addAndGet(100));
-                        }
-                    });
-                });
+                projectiles.forEach(projectile -> asteroids.forEach(asteroid -> {
+                    if (asteroid.collision(projectile)) {
+                        projectile.setIsAlive(false);
+                        asteroid.setIsAlive(false);
+                        text.setText("Points: " + points.addAndGet(100));
+                    }
+                }));
 
-                projectiles.stream().filter(projectile -> !projectile.isIsAlive()).forEach(projectile -> {
-                    pane.getChildren().remove(projectile.getCharacter());
-                });
+                projectiles.stream().filter(Character::isIsAlive).forEach(projectile -> pane.getChildren().remove(projectile.getCharacter()));
 
                 projectiles.removeAll(projectiles.stream()
-                        .filter(projectile -> !projectile.isIsAlive())
+                        .filter(Character::isIsAlive)
                         .collect(Collectors.toList()));
 
-                asteroids.stream().filter(asteroid -> !asteroid.isIsAlive()).forEach(asteroid -> {
-                    pane.getChildren().remove(asteroid.getCharacter());
-                });
+                asteroids.stream().filter(Character::isIsAlive).forEach(asteroid -> pane.getChildren().remove(asteroid.getCharacter()));
 
                 asteroids.removeAll(asteroids.stream()
-                        .filter(asteroid -> !asteroid.isIsAlive())
+                        .filter(Character::isIsAlive)
                         .collect(Collectors.toList()));
 
                 ship.move();
-                projectiles.forEach(projectile -> projectile.move());
-                asteroids.forEach(asteroid -> asteroid.move());
+                projectiles.forEach(Character::move);
+                asteroids.forEach(Asteroid::move);
                 asteroids.forEach(asteroid -> {
                     if (asteroid.collision(ship)) {
                         stop();
@@ -164,11 +152,6 @@ public class AsteroidsApplication extends Application {
         stage.getIcons().add(new Image("file:icon.png"));
         stage.show();
 
-    }
-
-    public static int partsCompleted() {
-        // State how many parts you have completed using the return value of this method
-        return 4;
     }
 
 }

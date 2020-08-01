@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
  */
 public class Asteroid extends Character {
 
-    private double rotationalMovement;
+    private final double rotationalMovement;
 
     public Asteroid(int x, int y) {
         super(new PolygonFactory().createPolygon(), x, y);
