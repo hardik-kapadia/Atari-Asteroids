@@ -14,6 +14,7 @@ import Characters.Character;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -159,8 +160,8 @@ public class AsteroidsApplication extends Application {
 
         stage.setScene(scene);
 
-        stage.setTitle(
-                "Asteroids by Atari");
+        stage.setTitle("Asteroids by Atari");
+        stage.getIcons().add(new Image("file:icon.png"));
         stage.show();
 
     }
