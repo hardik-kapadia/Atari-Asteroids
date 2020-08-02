@@ -1,0 +1,1 @@
+java --module-path C:\src\jfx\javafx-sdk-14.0.2.1\lib --add-modules javafx.controls,javafx.fxml -jar out\artifacts\Asteroids_jar\Asteroids.jar
