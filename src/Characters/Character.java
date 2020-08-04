@@ -48,13 +48,16 @@ public abstract class Character {
         double changeY = Math.sin(Math.toRadians(character.getRotate())) * 0.05;
 
         this.movement = this.movement.add(changeX, changeY);
+
     }
 
     public void turnLeft() {
+        System.out.println("turning left");
         character.setRotate(character.getRotate() - 5);
     }
 
     public void turnRight() {
+        System.out.println("Turning right");
         character.setRotate(character.getRotate() + 5);
     }
 
@@ -64,17 +67,19 @@ public abstract class Character {
 
         if (this.character.getTranslateX() < 0) {
             this.character.setTranslateX(this.character.getTranslateX() + AsteroidsApplication.WIDTH);
+
         }
 
         if (this.character.getTranslateX() > AsteroidsApplication.WIDTH) {
             this.character.setTranslateX(this.character.getTranslateX() % AsteroidsApplication.WIDTH);
+
         }
 
-        if (this.character.getTranslateY() < 0) {
+        if (this.character.getTranslateY() <= 0) {
             this.character.setTranslateY(this.character.getTranslateY() + AsteroidsApplication.HEIGHT);
         }
 
-        if (this.character.getTranslateY() > AsteroidsApplication.HEIGHT) {
+        if (this.character.getTranslateY() >= AsteroidsApplication.HEIGHT) {
             this.character.setTranslateY(this.character.getTranslateY() % AsteroidsApplication.HEIGHT);
         }
     }
