@@ -52,12 +52,10 @@ public abstract class Character {
     }
 
     public void turnLeft() {
-        System.out.println("turning left");
         character.setRotate(character.getRotate() - 5);
     }
 
     public void turnRight() {
-        System.out.println("Turning right");
         character.setRotate(character.getRotate() + 5);
     }
 

@@ -36,7 +36,7 @@ public class AsteroidsApplication extends Application {
     private Pane pane;
     private static ArrayList<AtomicInteger> allPoints;
     private Font font;
-    private  ArrayList<Hyperlink> buttons;
+    private ArrayList<Hyperlink> buttons;
 
     public static void main(String[] args) {
         launch(AsteroidsApplication.class);
@@ -176,6 +176,8 @@ public class AsteroidsApplication extends Application {
                     }
                 }));
 
+                projectiles.forEach(Projectile::isOutBounds);
+
                 projectiles.stream().filter(Character::isIsAlive).forEach(projectile -> pane.getChildren().remove(projectile.getCharacter()));
 
                 projectiles.removeAll(projectiles.stream()
@@ -221,7 +223,7 @@ public class AsteroidsApplication extends Application {
     private void stopGame() {
         runner.stop();
         allPoints.add(points);
-        for(Hyperlink button: buttons){
+        for (Hyperlink button : buttons) {
             button.setVisited(false);
         }
         this.layout.setCenter(this.startMenu);
@@ -248,7 +250,6 @@ public class AsteroidsApplication extends Application {
         Title.setScaleX(2);
         Title.setScaleY(2);
         Hyperlink back = new Hyperlink("Back to Main Menu");
-        back.setTranslateX(back.getTranslateX());
         back.setFont(this.font);
         GridPane sLayout = new GridPane();
         sLayout.setVgap(10);
