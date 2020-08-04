@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -171,8 +172,8 @@ public class AsteroidsApplication extends Application {
                 }
                 projectiles.forEach(projectile -> asteroids.forEach(asteroid -> {
                     if (asteroid.collision(projectile)) {
-                        projectile.setIsDead(false);
-                        asteroid.setIsDead(false);
+                        projectile.setIsDead(true);
+                        asteroid.setIsDead(true);
                         points.addAndGet(100);
                         text.setText("Points: " + points);
                     }
@@ -247,17 +248,18 @@ public class AsteroidsApplication extends Application {
             Label temp = new Label(score.toString());
             temp.setFont(this.font);
             temp.setTextFill(Color.web("#00ccff"));
+            temp.setTextAlignment(TextAlignment.CENTER);
             scores.add(temp);
         }
         Label Title = new Label("Scores");
         Title.setFont(this.font);
         Title.setTextFill(Color.web("#00ccff"));
-        Title.setScaleX(2);
-        Title.setScaleY(2);
+        Title.setFont(Font.loadFont("file:res/pixelated.ttf", 40));
         Hyperlink back = new Hyperlink("Back to Main Menu");
         back.setFont(this.font);
         GridPane sLayout = new GridPane();
         sLayout.setVgap(10);
+        Title.setTextAlignment(TextAlignment.CENTER);
         sLayout.setAlignment(Pos.CENTER);
         sLayout.add(Title, 1, 0);
         for (int i = 0; i < scores.size(); i++) {

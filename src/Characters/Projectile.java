@@ -22,7 +22,6 @@ public class Projectile extends Character {
                 super.getCharacter().getTranslateY() <= 0 ||
                 super.getCharacter().getTranslateX() >= AsteroidsApplication.WIDTH ||
                 super.getCharacter().getTranslateX() <= 0) {
-            System.out.println("The character is dead");
             super.setIsDead(true);
         }
 
