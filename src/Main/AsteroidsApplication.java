@@ -45,7 +45,7 @@ public class AsteroidsApplication extends Application {
     @Override
     public void init() {
         allPoints = new ArrayList<>();
-        this.font = Font.loadFont("file:pixelated.ttf", 20);
+        this.font = Font.loadFont("file:res/pixelated.ttf", 20);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class AsteroidsApplication extends Application {
         startMenu.setAlignment(Pos.CENTER);
         startMenu.setSpacing(20);
 
-        Image titleFile = new Image("file:icon.png");
+        Image titleFile = new Image("file:res/icon.png");
         ImageView title = new ImageView(titleFile);
         title.setFitHeight(100);
         title.setFitWidth(220);
@@ -99,7 +99,6 @@ public class AsteroidsApplication extends Application {
 
         Ship ship = new Ship(300, 200);
         ship.getCharacter().setFill(Color.web("#990000"));
-        // pane.getChildren().add(ship.getCharacter());
 
         Random random = new Random();
 
@@ -215,7 +214,7 @@ public class AsteroidsApplication extends Application {
         stage.setScene(scene);
 
         stage.setTitle("Asteroids by Atari");
-        stage.getIcons().add(new Image("file:icon.png"));
+        stage.getIcons().add(new Image("file:res/icon.png"));
         stage.show();
 
     }
