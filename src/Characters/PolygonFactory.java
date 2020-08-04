@@ -4,9 +4,6 @@ import java.util.Random;
 
 import javafx.scene.shape.Polygon;
 
-/**
- * @author tylderDurden
- */
 public class PolygonFactory {
 
     public Polygon createPolygon() {

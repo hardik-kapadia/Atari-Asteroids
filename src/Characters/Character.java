@@ -16,7 +16,7 @@ import javafx.scene.shape.Shape;
  */
 public abstract class Character {
 
-    private boolean isAlive;
+    private boolean isDead;
 
     private final Polygon character;
     private Point2D movement;
@@ -28,19 +28,19 @@ public abstract class Character {
         character.setTranslateY(y);
 
         movement = new Point2D(0, 0);
-        this.isAlive = true;
+        this.isDead = false;
     }
 
     public Polygon getCharacter() {
         return this.character;
     }
 
-    public boolean isIsAlive() {
-        return !isAlive;
+    public boolean isDead() {
+        return isDead;
     }
 
-    public void setIsAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public void setIsDead(boolean isDead) {
+        this.isDead = isDead;
     }
 
     public void accelerate() {
@@ -62,24 +62,6 @@ public abstract class Character {
     public void move() {
         character.setTranslateX(character.getTranslateX() + movement.getX());
         character.setTranslateY(character.getTranslateY() + movement.getY());
-
-        if (this.character.getTranslateX() < 0) {
-            this.character.setTranslateX(this.character.getTranslateX() + AsteroidsApplication.WIDTH);
-
-        }
-
-        if (this.character.getTranslateX() > AsteroidsApplication.WIDTH) {
-            this.character.setTranslateX(this.character.getTranslateX() % AsteroidsApplication.WIDTH);
-
-        }
-
-        if (this.character.getTranslateY() <= 0) {
-            this.character.setTranslateY(this.character.getTranslateY() + AsteroidsApplication.HEIGHT);
-        }
-
-        if (this.character.getTranslateY() >= AsteroidsApplication.HEIGHT) {
-            this.character.setTranslateY(this.character.getTranslateY() % AsteroidsApplication.HEIGHT);
-        }
     }
 
     public Point2D getMovement() {

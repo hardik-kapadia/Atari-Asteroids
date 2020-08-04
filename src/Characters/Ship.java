@@ -3,9 +3,6 @@ package Characters;
 import Main.AsteroidsApplication;
 import javafx.scene.shape.Polygon;
 
-/**
- * @author tylderDurden
- */
 public class Ship extends Character {
 
     public Ship(int x, int y) {

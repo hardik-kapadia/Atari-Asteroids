@@ -12,6 +12,7 @@ import Characters.Ship;
 import Characters.Character;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
@@ -25,6 +26,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+/**
+ * @author thecoderenroute
+ */
 
 public class AsteroidsApplication extends Application {
 
@@ -112,6 +117,7 @@ public class AsteroidsApplication extends Application {
 
         start.setOnAction((event) -> this.startGame());
         scores.setOnAction((event) -> this.showScores());
+        exit.setOnAction((actionEvent -> Platform.exit()));
 
         asteroids.forEach(asteroid
                 -> pane.getChildren().add(asteroid.getCharacter()));
@@ -131,11 +137,8 @@ public class AsteroidsApplication extends Application {
 
             @Override
             public void start() {
-                System.out.println(pane.getChildren().toString());
                 pane.getChildren().clear();
                 pane.getChildren().add(text);
-                System.out.println("Animation timer started!");
-                System.out.println("Inputs are: " + input.toString());
                 super.start();
                 asteroids = getAsteroids();
                 projectiles = new ArrayList<>();
@@ -168,8 +171,8 @@ public class AsteroidsApplication extends Application {
                 }
                 projectiles.forEach(projectile -> asteroids.forEach(asteroid -> {
                     if (asteroid.collision(projectile)) {
-                        projectile.setIsAlive(false);
-                        asteroid.setIsAlive(false);
+                        projectile.setIsDead(false);
+                        asteroid.setIsDead(false);
                         points.addAndGet(100);
                         text.setText("Points: " + points);
                     }
@@ -177,16 +180,16 @@ public class AsteroidsApplication extends Application {
 
                 projectiles.forEach(Projectile::isOutBounds);
 
-                projectiles.stream().filter(Character::isIsAlive).forEach(projectile -> pane.getChildren().remove(projectile.getCharacter()));
+                projectiles.stream().filter(Character::isDead).forEach(projectile -> pane.getChildren().remove(projectile.getCharacter()));
 
                 projectiles.removeAll(projectiles.stream()
-                        .filter(Character::isIsAlive)
+                        .filter(Character::isDead)
                         .collect(Collectors.toList()));
 
-                asteroids.stream().filter(Character::isIsAlive).forEach(asteroid -> pane.getChildren().remove(asteroid.getCharacter()));
+                asteroids.stream().filter(Character::isDead).forEach(asteroid -> pane.getChildren().remove(asteroid.getCharacter()));
 
                 asteroids.removeAll(asteroids.stream()
-                        .filter(Character::isIsAlive)
+                        .filter(Character::isDead)
                         .collect(Collectors.toList()));
 
                 ship.move();
@@ -236,6 +239,9 @@ public class AsteroidsApplication extends Application {
     }
 
     private void showScores() {
+        for (Hyperlink button : buttons) {
+            button.setVisited(false);
+        }
         ArrayList<Label> scores = new ArrayList<>();
         for (AtomicInteger score : AsteroidsApplication.allPoints) {
             Label temp = new Label(score.toString());
