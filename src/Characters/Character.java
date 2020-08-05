@@ -11,9 +11,6 @@ import javafx.scene.shape.Shape;
  * and open the template in the editor.
  */
 
-/**
- * @author tylderDurden
- */
 public abstract class Character {
 
     private boolean isDead;
