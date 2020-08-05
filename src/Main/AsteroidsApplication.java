@@ -10,6 +10,7 @@ import Characters.Asteroid;
 import Characters.Projectile;
 import Characters.Ship;
 import Characters.Character;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
